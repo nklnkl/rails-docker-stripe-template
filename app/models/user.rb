@@ -3,6 +3,8 @@ class User < ApplicationRecord
 
   has_many :allowlisted_jwts, dependent: :destroy
 
+  after_create :create_stripe_customer
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -30,5 +32,20 @@ class User < ApplicationRecord
 
   def delete_all_jwts
     allowlisted_jwts.destroy_all
+  end
+
+  private
+
+  def create_stripe_customer
+    customer = Stripe::Customer.create(
+      email: email,
+      metadata: {
+        user_id: id
+      }
+    )
+    update(stripe_customer_id: customer.id)
+  rescue Stripe::StripeError => e
+    Rails.logger.error "Failed to create Stripe customer: #{e.message}"
+    raise
   end
 end

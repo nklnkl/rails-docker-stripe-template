@@ -1,12 +1,18 @@
- # Rails API Docker Template
+# Rails API Docker Template
 
 This repository contains a template for developing a Ruby on Rails API using Docker. It's set up with PostgreSQL as the database and provides a streamlined development environment.
 
 ## Development Environment
 
 - Ruby version: 3.3.5
-- Rails version: 7.1.2
+- Rails version: 8.0.0
 - Database: PostgreSQL 13
+
+## Main Dependencies
+
+- Devise (~> 4.7) - Authentication solution
+- Devise-JWT (~> 0.12.1) - JWT authentication for Devise
+- Stripe (~> 13.1) - Payment processing integration
 
 ## Prerequisites
 
@@ -25,6 +31,10 @@ This repository contains a template for developing a Ruby on Rails API using Doc
    ```
    cp .env.example .env
    ```
+
+   Required environment variables:
+   - `DATABASE_URL`: PostgreSQL connection string
+   - `STRIPE_SECRET_KEY`: Your Stripe secret key (starts with 'sk_')
 
 3. Build the Docker images:
    ```
