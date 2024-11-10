@@ -28,4 +28,28 @@ class UsersController < ApplicationController
   def delete_all_jwts
     current_user.delete_all_jwts
   end
+
+  # GET /users/has_active_subscription
+  def has_active_subscription
+    if current_user.has_active_subscription?
+      head :ok
+    else
+      head :payment_required
+    end
+  end
+
+  # POST /users/create_checkout_session_for_subscription
+  #
+  # @param price_id [String] The ID of the price to create a checkout session for
+  # @return [Hash] A hash containing the URL of the checkout session
+  def create_checkout_session_for_subscription
+    render json: current_user.create_checkout_session_for_subscription(params[:price_id])
+  end
+
+  # POST /users/create_customer_portal_session
+  #
+  # @return [Hash] A hash containing the URL of the customer portal session
+  def create_customer_portal_session
+    render json: current_user.create_customer_portal_session
+  end
 end

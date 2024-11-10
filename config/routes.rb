@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   get "users/sign_ins", to: "users#active_jwts"
   delete "users/sign_ins/:jti", to: "users#delete_jwt"
   delete "users/sign_ins", to: "users#delete_all_jwts"
+  get "users/has_active_subscription", to: "users#has_active_subscription"
+  post "users/create_checkout_session_for_subscription", to: "users#create_checkout_session_for_subscription"
+  get "users/create_customer_portal_session", to: "users#create_customer_portal_session"
 end
