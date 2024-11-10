@@ -62,10 +62,12 @@ class User < ApplicationRecord
       customer: stripe_customer_id,
       success_url: "https://example.com/success",
       cancel_url: "https://example.com/cancel",
-      line_items: [{
-        price: price_id,
-        quantity: 1
-      }],
+      line_items: [
+        {
+          price: price_id,
+          quantity: 1
+        }
+      ],
       mode: "subscription"
     })
     { url: checkout_session.url }
