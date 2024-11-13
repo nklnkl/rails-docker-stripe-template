@@ -14,7 +14,7 @@ services:
   web:
     build:
       context: .
-      dockerfile: ${DOCKERFILE:-Dockerfile.dev}
+      dockerfile: Dockerfile
     volumes:
       - .:/rails
     ports:
@@ -22,7 +22,7 @@ services:
     env_file:
       - .env
     environment:
-      RAILS_ENV: ${RAILS_ENV:-development}
+      RAILS_ENV: development
       DATABASE_URL: ${DATABASE_URL}
     depends_on:
       - db
